@@ -1,0 +1,9 @@
+{
+    "name": "jacksleight/coast-doctrine",
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-4": {"Coast\\Doctrine\\": "lib//Doctrine//"}
+    }
+}
