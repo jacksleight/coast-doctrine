@@ -30,9 +30,14 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         }
     } 
 
+    public function getWrapped()
+    {
+        return $this->wrapped;
+    }
+
     public function call($class)
     {
-    	return $this->getRepository($class);
+        return $this->getRepository($class);
     }
 
     public function isPersisted($entity)
