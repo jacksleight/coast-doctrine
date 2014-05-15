@@ -33,4 +33,9 @@ class UrlType extends \Doctrine\DBAL\Types\Type
 	{
 		return self::URL;
 	}
+
+    public function requiresSQLCommentHint(\Doctrine\DBAL\Platforms\AbstractPlatform $platform)
+    {
+        return true;
+    }
 }

@@ -29,4 +29,9 @@ class JsonType extends \Doctrine\DBAL\Types\Type
 	{
 		return self::JSON;
 	}
+
+    public function requiresSQLCommentHint(\Doctrine\DBAL\Platforms\AbstractPlatform $platform)
+    {
+        return true;
+    }
 }
