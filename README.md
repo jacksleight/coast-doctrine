@@ -1,4 +1,4 @@
-# Coast Doctrine Extensions
+# Coast Doctrine
 
 Doctrine extensions for use with the Coast framework.
 
