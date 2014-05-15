@@ -8,19 +8,19 @@ namespace Coast\Doctrine\ORM\Query\MySql;
 
 class Floor extends \Doctrine\ORM\Query\AST\Functions\FunctionNode
 {
-	public $expression = null;
+    public $expression = null;
 
-	public function parse(\Doctrine\ORM\Query\Parser $parser)
-	{
-		$lexer = $parser->getLexer();
-		$parser->match(\Doctrine\ORM\Query\Lexer::T_IDENTIFIER);
-		$parser->match(\Doctrine\ORM\Query\Lexer::T_OPEN_PARENTHESIS);
-		$this->expression = $parser->ArithmeticExpression();
-		$parser->match(\Doctrine\ORM\Query\Lexer::T_CLOSE_PARENTHESIS);
-	}
+    public function parse(\Doctrine\ORM\Query\Parser $parser)
+    {
+        $lexer = $parser->getLexer();
+        $parser->match(\Doctrine\ORM\Query\Lexer::T_IDENTIFIER);
+        $parser->match(\Doctrine\ORM\Query\Lexer::T_OPEN_PARENTHESIS);
+        $this->expression = $parser->ArithmeticExpression();
+        $parser->match(\Doctrine\ORM\Query\Lexer::T_CLOSE_PARENTHESIS);
+    }
 
-	public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
-	{
-		return 'FLOOR(' . $this->expression->dispatch($sqlWalker) . ')';
-	}
+    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
+    {
+        return 'FLOOR(' . $this->expression->dispatch($sqlWalker) . ')';
+    }
 }

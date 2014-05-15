@@ -1,7 +1,15 @@
 {
     "name": "jacksleight/coast-doctrine",
+    "type": "library",
+    "description": "Doctrine extensions for use with the Coast framework",
+    "keywords": ["coast", "doctrine"],
+    "homepage": "http://coastphp.com/",
+    "license": "MIT",
     "require": {
         "php": ">=5.5.0"
+    },
+    "require": {
+        "jacksleight/coast": "dev-master"
     },
     "autoload": {
         "psr-4": {"Coast\\Doctrine\\": "lib//Doctrine//"},

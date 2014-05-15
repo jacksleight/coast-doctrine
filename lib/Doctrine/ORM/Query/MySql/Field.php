@@ -24,10 +24,10 @@ class Field extends \Doctrine\ORM\Query\AST\Functions\FunctionNode
         }
         $parser->match(\Doctrine\ORM\Query\Lexer::T_CLOSE_PARENTHESIS);
     }
-	
+    
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        $query  = 'FIELD(';		
+        $query  = 'FIELD(';        
         $query .= $this->field->dispatch($sqlWalker);
         $query .= ',';
         for ($i = 0; $i < count($this->values); $i++) {

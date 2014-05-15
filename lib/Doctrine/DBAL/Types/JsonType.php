@@ -8,27 +8,31 @@ namespace Coast\Doctrine\DBAL\Types;
 
 class JsonType extends \Doctrine\DBAL\Types\Type
 {
-	const JSON = 'json';
+    const JSON = 'json';
 
-	public function getSqlDeclaration(array $fieldDeclaration, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
-	{
-		return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
-	}
+    public function getSqlDeclaration(array $fieldDeclaration, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
+    {
+        return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
+    }
 
-	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
-	{
-		return json_decode($value, true);
-	}
+    public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
+    {
+        return isset($value)
+        	? json_decode($value, true)
+        	: null;
+    }
 
-	public function convertToDatabaseValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
-	{
-		return json_encode($value);
-	}
+    public function convertToDatabaseValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
+    {
+        return isset($value)
+        	? json_encode($value)
+        	: null;
+    }
 
-	public function getName()
-	{
-		return self::JSON;
-	}
+    public function getName()
+    {
+        return self::JSON;
+    }
 
     public function requiresSQLCommentHint(\Doctrine\DBAL\Platforms\AbstractPlatform $platform)
     {

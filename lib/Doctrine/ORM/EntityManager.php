@@ -14,7 +14,6 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
     {
         parent::__construct($wraped);
 
-        // @todo These only apply to MySQL configs
         $config = $this->getConfiguration();
         $functions = [
             'FIELD'         => 'Coast\Doctrine\ORM\Query\MySql\Field',

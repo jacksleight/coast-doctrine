@@ -7,15 +7,15 @@
 namespace Coast\Doctrine\DBAL\Types;
 
 use Doctrine\DBAL\Types,
-	Doctrine\DBAL\Platforms\AbstractPlatform;
+    Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class CarbonDateTimeType extends Types\DateTimeType
 {
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-    	$value = parent::convertToPHPValue($value, $platform);
+        $value = parent::convertToPHPValue($value, $platform);
         return isset($value)
-        	? \Carbon\Carbon::instance($value)
-        	: $value;
+            ? \Carbon\Carbon::instance($value)
+            : $value;
     }
 }
