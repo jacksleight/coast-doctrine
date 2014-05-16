@@ -8,7 +8,7 @@ namespace Coast\Doctrine\DBAL\Types;
 
 class UrlType extends \Doctrine\DBAL\Types\Type
 {
-    const URL = 'url';
+    const URL = 'coast_url';
 
     public function getSqlDeclaration(array $fieldDeclaration, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
     {

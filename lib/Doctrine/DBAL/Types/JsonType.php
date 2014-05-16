@@ -8,7 +8,7 @@ namespace Coast\Doctrine\DBAL\Types;
 
 class JsonType extends \Doctrine\DBAL\Types\Type
 {
-    const JSON = 'json';
+    const JSON = 'coast_json';
 
     public function getSqlDeclaration(array $fieldDeclaration, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
     {
