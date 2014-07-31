@@ -6,6 +6,10 @@
 
 namespace Coast\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder,
+    Doctrine\ORM\Query,
+    Doctrine\ORM\Tools\Pagination\Paginator;
+
 class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator implements \Coast\App\Access
 {
     use \Coast\App\Access\Implementation;
@@ -36,7 +40,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         return $this->wrapped;
     }
 
-    public function call($class)
+    public function __invoke($class)
     {
         return $this->getRepository($class);
     }
@@ -52,5 +56,15 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         $uow = $this->getUnitOfWork();
         $uow->computeChangeSets();
         return $uow->getEntityChangeSet($entity);
+    }
+
+    public function paginate(QueryBuilder $query, $limit, $page)
+    {
+        $query
+            ->setMaxResults($limit)
+            ->setFirstResult($limit * ($page - 1));
+        $paginator = new Paginator($query->getQuery());
+        $paginator->setUseOutputWalkers(false);
+        return $paginator;
     }
 }
