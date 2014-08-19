@@ -1,18 +1,23 @@
 {
-    "name": "jacksleight/coast-doctrine",
-    "type": "library",
-    "description": "Doctrine extensions for use with the Coast framework",
-    "keywords": ["coast", "doctrine"],
-    "homepage": "http://coastphp.com/",
-    "license": "MIT",
-    "require": {
-        "php": ">=5.5.0"
-    },
-    "require": {
-        "jacksleight/coast": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {"Coast\\Doctrine\\": "lib//Doctrine//"},
-        "files": ["lib/Doctrine.php"]
-    }
+  "name": "jacksleight/coast-doctrine",
+  "type": "library",
+  "description": "Coast component for integration with Doctrine ORM",
+  "keywords": ["coast", "doctrine"],
+  "homepage": "http://coastphp.com/",
+  "license": "MIT",
+  "authors": [
+    {"name": "Jack Sleight", "email": "jacksleight@gmail.com"}
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "doctrine/orm": "2.4.*",
+    "jacksleight/coast": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {"Coast\\Doctrine\\": "lib//Doctrine//"},
+    "files": ["lib/Doctrine.php"]
+  },
+  "suggest": {
+    "nesbot/carbon": "to use Carbon objects in date and time fields"
+  }
 }
