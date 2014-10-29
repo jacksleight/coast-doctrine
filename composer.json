@@ -14,8 +14,10 @@
     "jacksleight/coast": "dev-master"
   },
   "autoload": {
-    "psr-4": {"Coast\\Doctrine\\": "lib//Doctrine//"},
-    "files": ["lib/Doctrine.php"]
+    "psr-4": {
+      "Coast\\Doctrine\\": "lib/"
+    },
+    "files": ["funcs/funcs.php"]
   },
   "suggest": {
     "nesbot/carbon": "to use Carbon objects in date and time fields"
