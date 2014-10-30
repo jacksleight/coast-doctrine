@@ -3,15 +3,14 @@
   "type": "library",
   "description": "Coast component for integration with Doctrine ORM",
   "keywords": ["coast", "doctrine"],
-  "homepage": "http://coastphp.com/",
+  "homepage": "http://coast.jacksleight.com/",
   "license": "MIT",
   "authors": [
     {"name": "Jack Sleight", "email": "jacksleight@gmail.com"}
   ],
   "require": {
     "php": ">=5.5.0",
-    "doctrine/orm": "2.4.*",
-    "jacksleight/coast": "dev-master"
+    "doctrine/orm": "2.4.*"
   },
   "autoload": {
     "psr-4": {
