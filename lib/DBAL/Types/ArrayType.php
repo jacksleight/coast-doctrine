@@ -13,7 +13,7 @@ class ArrayType extends \Doctrine\DBAL\Types\ArrayType
     public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform)
     {
         return isset($value)
-        	? json_decode($value, true)
+        	? json_decode($value)
         	: null;
     }
 
