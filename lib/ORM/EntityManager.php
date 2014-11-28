@@ -35,7 +35,6 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         foreach ($functions as $name => $class) {
             $config->addCustomStringFunction($name, $class);
         }
-        $config->addCustomHydrationMode('coast_array', 'Coast\Doctrine\ORM\Internal\Hydration\ArrayHydrator');
     } 
 
     public function getWrapped()
