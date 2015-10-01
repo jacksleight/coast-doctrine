@@ -21,6 +21,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         $config = $this->getConfiguration();
         $functions = [
             'CEILING'       => 'Coast\Doctrine\ORM\Query\MySql\Ceiling',
+            'DATE_FORMAT'   => 'Coast\Doctrine\ORM\Query\MySql\DateFormat',
             'FIELD'         => 'Coast\Doctrine\ORM\Query\MySql\Field',
             'FLOOR'         => 'Coast\Doctrine\ORM\Query\MySql\Floor',
             'IF'            => 'Coast\Doctrine\ORM\Query\MySql\IfElse',
