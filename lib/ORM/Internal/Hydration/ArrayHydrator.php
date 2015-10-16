@@ -18,7 +18,9 @@ class ArrayHydrator extends DoctrineArrayHydrator
             $class = $this->_rsm->aliasMap[$dqlAlias];
             $meta  = $this->getClassMetadata($class);
             if ($meta->discriminatorMap) {
-                $class = $meta->discriminatorMap[$data[$meta->discriminatorColumn['name']]];
+                $class = isset($data[$meta->discriminatorColumn['name']])  
+                    ? $meta->discriminatorMap[$data[$meta->discriminatorColumn['name']]]
+                    : null;
             }
             $rowData['data'][$dqlAlias]['__CLASS__'] = $class;
         }
