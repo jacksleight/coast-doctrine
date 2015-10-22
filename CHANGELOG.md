@@ -1,13 +1,18 @@
 # Coast Doctrine Changelog
 
-### 0.2.1
+### 0.1.0
 
-* Update Doctrine dependecy
+* Initial release
 
 ### 0.2.0
 
 * Tweaks
 
-### 0.1.0
+### 0.2.1
 
-* Initial release
+* Update Doctrine dependecy
+
+### 0.5.0
+
+* Array Hydrator that includes original entity class in data
+* DATE_FORMAT DQL function
