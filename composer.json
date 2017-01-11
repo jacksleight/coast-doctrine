@@ -14,9 +14,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Coast\\Doctrine\\": "lib/"
+      "Coast\\Doctrine\\": "library/"
     },
-    "files": ["funcs/funcs.php"]
+    "files": [
+      "functions/general.php"
+    ]
   },
   "suggest": {
     "nesbot/carbon": "to use Carbon objects in date and time fields"
