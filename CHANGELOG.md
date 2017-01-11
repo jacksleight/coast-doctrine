@@ -16,3 +16,7 @@
 
 * Array Hydrator that includes original entity class in data
 * DATE_FORMAT DQL function
+
+### 0.6.0
+
+* Reorganise files
