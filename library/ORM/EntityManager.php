@@ -8,10 +8,13 @@ namespace Coast\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder,
     Doctrine\ORM\Query,
-    Doctrine\ORM\Tools\Pagination\Paginator;
+    Doctrine\ORM\Tools\Pagination\Paginator,
+    Doctrine\Common\EventSubscriber;
 
 class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator implements \Coast\App\Access
 {
+    protected $_listeners = [];
+    
     use \Coast\App\Access\Implementation;
     
     public function __construct($wraped)
@@ -48,6 +51,33 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
     public function __invoke($class)
     {
         return $this->getRepository($class);
+    }
+
+    public function ref($class, $id)
+    {
+        return $this->getReference(Chalk::info($class)->class, $id);
+    }
+
+    public function dir($name, \Coast\Dir $dir)
+    {
+        $this
+            ->getConfiguration()
+            ->getMetadataDriverImpl()
+            ->addPaths([$name => $dir->name()]);
+    }
+
+    public function listener($name, EventSubscriber $listener = null)
+    {
+        if (func_num_args() > 1) {
+            $this->_listeners[$name] = $listener;
+            $this
+                ->getEventManager()
+                ->addEventSubscriber($listener);
+            return $this;
+        }
+        return isset($this->_listeners[$name])
+            ? $this->_listeners[$name]
+            : null;
     }
 
     public function isPersisted($entity)
