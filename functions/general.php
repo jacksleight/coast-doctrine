@@ -9,7 +9,9 @@ namespace Coast\Doctrine;
 function register_dbal_types()
 {
     $types = [
-        'coast_url' => 'Coast\Doctrine\DBAL\Types\UrlType',
+        'coast_url'        => 'Coast\Doctrine\DBAL\Types\UrlType',
+        'coast_model_one'  => 'Coast\Doctrine\DBAL\Types\ModelOneType',
+        'coast_model_many' => 'Coast\Doctrine\DBAL\Types\ModelManyType',
     ];
     foreach ($types as $name => $class) {
         \Doctrine\DBAL\Types\Type::addType($name, $class);
