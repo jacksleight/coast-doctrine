@@ -20,3 +20,7 @@
 ### 0.6.0
 
 * Reorganise files
+
+### 0.6.1
+
+* Enhancements
