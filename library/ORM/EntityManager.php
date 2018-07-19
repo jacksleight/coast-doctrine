@@ -23,18 +23,19 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
 
         $config = $this->getConfiguration();
         $functions = [
-            'CEILING'       => 'Coast\Doctrine\ORM\Query\MySql\Ceiling',
-            'DATE_FORMAT'   => 'Coast\Doctrine\ORM\Query\MySql\DateFormat',
-            'FIELD'         => 'Coast\Doctrine\ORM\Query\MySql\Field',
-            'FLOOR'         => 'Coast\Doctrine\ORM\Query\MySql\Floor',
-            'IF'            => 'Coast\Doctrine\ORM\Query\MySql\IfElse',
-            'MONTH'         => 'Coast\Doctrine\ORM\Query\MySql\Month',
-            'RAND'          => 'Coast\Doctrine\ORM\Query\MySql\Rand',
-            'ROUND'         => 'Coast\Doctrine\ORM\Query\MySql\Round',
-            'UTC_DATE'      => 'Coast\Doctrine\ORM\Query\MySql\UtcDate',
-            'UTC_TIME'      => 'Coast\Doctrine\ORM\Query\MySql\UtcTime',
-            'UTC_TIMESTAMP' => 'Coast\Doctrine\ORM\Query\MySql\UtcTimestamp',
-            'YEAR'          => 'Coast\Doctrine\ORM\Query\MySql\Year',
+            'CEILING'         => 'Coast\Doctrine\ORM\Query\MySql\Ceiling',
+            'DATE_FORMAT'     => 'Coast\Doctrine\ORM\Query\MySql\DateFormat',
+            'FIELD'           => 'Coast\Doctrine\ORM\Query\MySql\Field',
+            'FLOOR'           => 'Coast\Doctrine\ORM\Query\MySql\Floor',
+            'IF'              => 'Coast\Doctrine\ORM\Query\MySql\IfElse',
+            'MONTH'           => 'Coast\Doctrine\ORM\Query\MySql\Month',
+            'RAND'            => 'Coast\Doctrine\ORM\Query\MySql\Rand',
+            'ROUND'           => 'Coast\Doctrine\ORM\Query\MySql\Round',
+            'UTC_DATE'        => 'Coast\Doctrine\ORM\Query\MySql\UtcDate',
+            'UTC_TIME'        => 'Coast\Doctrine\ORM\Query\MySql\UtcTime',
+            'UTC_TIMESTAMP'   => 'Coast\Doctrine\ORM\Query\MySql\UtcTimestamp',
+            'YEAR'            => 'Coast\Doctrine\ORM\Query\MySql\Year',
+            'SUBSTRING_INDEX' => 'Coast\Doctrine\ORM\Query\MySql\SubstringIndex',
         ];
         foreach ($functions as $name => $class) {
             $config->addCustomStringFunction($name, $class);
