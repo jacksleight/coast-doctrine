@@ -8,5 +8,5 @@ namespace Coast\Doctrine;
 
 class Doctrine
 {
-    const VERSION = '0.6.1';
+    const VERSION = '0.6.2';
 }

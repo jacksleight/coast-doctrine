@@ -24,3 +24,7 @@
 ### 0.6.1
 
 * Enhancements
+
+### 0.6.2
+
+* Enhancements
