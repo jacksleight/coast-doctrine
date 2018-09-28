@@ -54,7 +54,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         return $this->getRepository($class);
     }
 
-    public function ref($class, $id)
+    public function proxy($class, $id)
     {
         return $this->getReference(Chalk::info($class)->class, $id);
     }
