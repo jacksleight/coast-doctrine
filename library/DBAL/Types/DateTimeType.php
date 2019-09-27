@@ -6,16 +6,19 @@
 
 namespace Coast\Doctrine\DBAL\Types;
 
+use Coast\DateTime;
 use Doctrine\DBAL\Types,
     Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class CarbonDateTimeType extends Types\DateTimeType
+class DateTimeType extends Types\DateTimeType
 {
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
-        return isset($value)
-            ? \Carbon\Carbon::instance($value)
-            : $value;
+        if (isset($value)) {
+            $value = new DateTime($value->format('Y-m-d H:i:s.u'), $value->getTimezone());
+            $value->mode(DateTime::MODE_DATETIME);
+        }
+        return $value;
     }
 }
