@@ -10,6 +10,7 @@ function register_dbal_types()
 {
     $types = [
         'coast_url'        => 'Coast\Doctrine\DBAL\Types\UrlType',
+        'coast_file'       => 'Coast\Doctrine\DBAL\Types\FileType',
         'coast_model_one'  => 'Coast\Doctrine\DBAL\Types\ModelOneType',
         'coast_model_many' => 'Coast\Doctrine\DBAL\Types\ModelManyType',
     ];
