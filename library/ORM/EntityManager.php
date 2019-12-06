@@ -21,26 +21,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
     {
         parent::__construct($wraped);
 
-        $config = $this->getConfiguration();
-        $functions = [
-            'CEILING'         => 'Coast\Doctrine\ORM\Query\MySql\Ceiling',
-            'DATE_FORMAT'     => 'Coast\Doctrine\ORM\Query\MySql\DateFormat',
-            'FIELD'           => 'Coast\Doctrine\ORM\Query\MySql\Field',
-            'FLOOR'           => 'Coast\Doctrine\ORM\Query\MySql\Floor',
-            'IF'              => 'Coast\Doctrine\ORM\Query\MySql\IfElse',
-            'MONTH'           => 'Coast\Doctrine\ORM\Query\MySql\Month',
-            'RAND'            => 'Coast\Doctrine\ORM\Query\MySql\Rand',
-            'ROUND'           => 'Coast\Doctrine\ORM\Query\MySql\Round',
-            'UTC_DATE'        => 'Coast\Doctrine\ORM\Query\MySql\UtcDate',
-            'UTC_TIME'        => 'Coast\Doctrine\ORM\Query\MySql\UtcTime',
-            'UTC_TIMESTAMP'   => 'Coast\Doctrine\ORM\Query\MySql\UtcTimestamp',
-            'YEAR'            => 'Coast\Doctrine\ORM\Query\MySql\Year',
-            'SUBSTRING_INDEX' => 'Coast\Doctrine\ORM\Query\MySql\SubstringIndex',
-        ];
-        foreach ($functions as $name => $class) {
-            $config->addCustomStringFunction($name, $class);
-        }
-        
+        $config = $this->getConfiguration();       
         $config->addCustomHydrationMode('coast_array', 'Coast\Doctrine\ORM\Internal\Hydration\ArrayHydrator');
     } 
 
@@ -49,14 +30,14 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         return $this->wrapped;
     }
 
-    public function __invoke($class)
+    public function repository($class)
     {
         return $this->getRepository($class);
     }
 
-    public function proxy($class, $id)
+    public function reference($class, $id)
     {
-        return $this->getReference(Chalk::info($class)->class, $id);
+        return $this->getReference($class, $id);
     }
 
     public function dir($name, \Coast\Dir $dir)
@@ -81,6 +62,12 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
             : null;
     }
 
+    public function identifier($entity)
+    {
+        $uow = $this->getUnitOfWork();
+        return $uow->getEntityIdentifier($entity);
+    }
+
     public function isPersisted($entity)
     {
         $uow = $this->getUnitOfWork();
@@ -102,5 +89,10 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
         $paginator = new Paginator($query->getQuery());
         $paginator->setUseOutputWalkers(false);
         return $paginator;
+    }
+
+    public function __invoke($class)
+    {
+        return $this->repository($class);
     }
 }
