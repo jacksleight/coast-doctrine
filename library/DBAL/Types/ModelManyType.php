@@ -14,6 +14,8 @@ class ModelManyType extends Types\JsonArrayType
 {
     const MODEL_MANY = 'coast_model_many';
 
+    static public $parser = null;
+
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
@@ -37,7 +39,7 @@ class ModelManyType extends Types\JsonArrayType
             $items = $value;
             $value = [];
             foreach ($items as $i => $item) {
-                $value[$i] = $item->toArray() + [
+                $value[$i] = $item->toArray(static::$parser) + [
                     '__CLASS__' => get_class($item),
                 ];
             }

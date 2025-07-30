@@ -13,6 +13,8 @@ class ModelOneType extends Types\JsonArrayType
 {
     const MODEL_ONE = 'coast_model_one';
 
+    static public $parser = null;
+
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
@@ -29,7 +31,7 @@ class ModelOneType extends Types\JsonArrayType
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (isset($value)) {
-            $value = $value->toArray() + [
+            $value = $value->toArray(static::$parser) + [
                 '__CLASS__' => get_class($value),
             ];
         }
