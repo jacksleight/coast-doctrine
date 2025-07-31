@@ -42,7 +42,7 @@ class ModelOneType extends Types\JsonArrayType
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (isset($value)) {
-            $value = $value->toArray(static::$parser) + [
+            $value = $value->toArray(static::$_parser) + [
                 '__CLASS__' => get_class($value),
             ];
         }
