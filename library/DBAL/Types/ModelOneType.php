@@ -1,13 +1,14 @@
 <?php
+
 /*
  * Copyright 2017 Jack Sleight <http://jacksleight.com/>
- * This source file is subject to the MIT license that is bundled with this package in the file LICENCE. 
+ * This source file is subject to the MIT license that is bundled with this package in the file LICENCE.
  */
 
 namespace Coast\Doctrine\DBAL\Types;
 
-use Doctrine\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types;
 
 class ModelOneType extends Types\JsonArrayType
 {
@@ -20,6 +21,7 @@ class ModelOneType extends Types\JsonArrayType
         if (func_num_args() > 0) {
             self::$_parser = $parser;
         }
+
         return self::$_parser;
     }
 
@@ -28,11 +30,12 @@ class ModelOneType extends Types\JsonArrayType
         $value = parent::convertToPHPValue($value, $platform);
         if (isset($value)) {
             $class = $value['__CLASS__'];
-            $data  = $value;
+            $data = $value;
             unset($data['__CLASS__']);
-            $value = new $class();
+            $value = new $class;
             $value->fromArray($data);
         }
+
         return $value;
     }
 
@@ -43,6 +46,7 @@ class ModelOneType extends Types\JsonArrayType
                 '__CLASS__' => get_class($value),
             ];
         }
+
         return parent::convertToDatabaseValue($value, $platform);
     }
 

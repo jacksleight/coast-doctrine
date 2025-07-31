@@ -1,29 +1,29 @@
 <?php
-/* 
+
+/*
  * Copyright 2017 Jack Sleight <http://jacksleight.com/>
- * This source file is subject to the MIT license that is bundled with this package in the file LICENCE. 
+ * This source file is subject to the MIT license that is bundled with this package in the file LICENCE.
  */
 
 namespace Coast\Doctrine\ORM;
 
-use Doctrine\ORM\QueryBuilder,
-    Doctrine\ORM\Query,
-    Doctrine\ORM\Tools\Pagination\Paginator,
-    Doctrine\Common\EventSubscriber;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator implements \Coast\App\Access
 {
     protected $_listeners = [];
-    
+
     use \Coast\App\Access\Implementation;
-    
+
     public function __construct($wraped)
     {
         parent::__construct($wraped);
 
-        $config = $this->getConfiguration();       
+        $config = $this->getConfiguration();
         $config->addCustomHydrationMode('coast_array', 'Coast\Doctrine\ORM\Internal\Hydration\ArrayHydrator');
-    } 
+    }
 
     public function getWrapped()
     {
@@ -48,15 +48,17 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
             ->addPaths([$name => $dir->name()]);
     }
 
-    public function listener($name, EventSubscriber $listener = null)
+    public function listener($name, ?EventSubscriber $listener = null)
     {
         if (func_num_args() > 1) {
             $this->_listeners[$name] = $listener;
             $this
                 ->getEventManager()
                 ->addEventSubscriber($listener);
+
             return $this;
         }
+
         return isset($this->_listeners[$name])
             ? $this->_listeners[$name]
             : null;
@@ -65,12 +67,14 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
     public function identifier($entity)
     {
         $uow = $this->getUnitOfWork();
+
         return $uow->getEntityIdentifier($entity);
     }
 
     public function isPersisted($entity)
     {
         $uow = $this->getUnitOfWork();
+
         return $uow->getEntityState($entity) == \Doctrine\ORM\UnitOfWork::STATE_MANAGED;
     }
 
@@ -78,6 +82,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
     {
         $uow = $this->getUnitOfWork();
         $uow->computeChangeSets();
+
         return $uow->getEntityChangeSet($entity);
     }
 
@@ -88,6 +93,7 @@ class EntityManager extends \Doctrine\ORM\Decorator\EntityManagerDecorator imple
             ->setFirstResult($limit * ($page - 1));
         $paginator = new Paginator($query->getQuery());
         $paginator->setUseOutputWalkers(false);
+
         return $paginator;
     }
 

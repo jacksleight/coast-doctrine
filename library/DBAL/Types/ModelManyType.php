@@ -1,14 +1,15 @@
 <?php
+
 /*
  * Copyright 2017 Jack Sleight <http://jacksleight.com/>
- * This source file is subject to the MIT license that is bundled with this package in the file LICENCE. 
+ * This source file is subject to the MIT license that is bundled with this package in the file LICENCE.
  */
 
 namespace Coast\Doctrine\DBAL\Types;
 
 use Coast\Collection;
-use Doctrine\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types;
 
 class ModelManyType extends Types\JsonArrayType
 {
@@ -21,6 +22,7 @@ class ModelManyType extends Types\JsonArrayType
         if (func_num_args() > 0) {
             self::$_parser = $parser;
         }
+
         return self::$_parser;
     }
 
@@ -29,15 +31,16 @@ class ModelManyType extends Types\JsonArrayType
         $value = parent::convertToPHPValue($value, $platform);
         if (isset($value)) {
             $items = $value;
-            $value = new Collection();
+            $value = new Collection;
             foreach ($items as $i => $item) {
                 $class = $item['__CLASS__'];
-                $data  = $item;
+                $data = $item;
                 unset($data['__CLASS__']);
-                $value[$i] = new $class();
+                $value[$i] = new $class;
                 $value[$i]->fromArray($data);
             }
         }
+
         return $value;
     }
 
@@ -52,6 +55,7 @@ class ModelManyType extends Types\JsonArrayType
                 ];
             }
         }
+
         return parent::convertToDatabaseValue($value, $platform);
     }
 

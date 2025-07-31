@@ -1,7 +1,8 @@
 <?php
-/* 
+
+/*
  * Copyright 2017 Jack Sleight <http://jacksleight.com/>
- * This source file is subject to the MIT license that is bundled with this package in the file LICENCE. 
+ * This source file is subject to the MIT license that is bundled with this package in the file LICENCE.
  */
 
 namespace Coast\Doctrine\ORM\Internal\Hydration;
@@ -16,9 +17,9 @@ class ArrayHydrator extends DoctrineArrayHydrator
 
         foreach ($rowData['data'] as $dqlAlias => $data) {
             $class = $this->_rsm->aliasMap[$dqlAlias];
-            $meta  = $this->getClassMetadata($class);
+            $meta = $this->getClassMetadata($class);
             if ($meta->discriminatorMap) {
-                $class = isset($data[$meta->discriminatorColumn['name']])  
+                $class = isset($data[$meta->discriminatorColumn['name']])
                     ? $meta->discriminatorMap[$data[$meta->discriminatorColumn['name']]]
                     : null;
             }
