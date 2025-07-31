@@ -13,7 +13,15 @@ class ModelOneType extends Types\JsonArrayType
 {
     const MODEL_ONE = 'coast_model_one';
 
-    static public $parser = null;
+    protected static $_parser;
+
+    public static function parser($parser = null)
+    {
+        if (func_num_args() > 0) {
+            self::$_parser = $parser;
+        }
+        return self::$_parser;
+    }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
