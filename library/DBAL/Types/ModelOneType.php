@@ -10,7 +10,7 @@ namespace Coast\Doctrine\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types;
 
-class ModelOneType extends Types\JsonArrayType
+class ModelOneType extends Types\JsonType
 {
     const MODEL_ONE = 'coast_model_one';
 
@@ -28,6 +28,7 @@ class ModelOneType extends Types\JsonArrayType
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
+
         if (isset($value)) {
             $class = $value['__CLASS__'];
             $data = $value;

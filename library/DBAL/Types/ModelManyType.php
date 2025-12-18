@@ -11,7 +11,7 @@ use Coast\Collection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types;
 
-class ModelManyType extends Types\JsonArrayType
+class ModelManyType extends Types\JsonType
 {
     const MODEL_MANY = 'coast_model_many';
 
@@ -29,16 +29,18 @@ class ModelManyType extends Types\JsonArrayType
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
-        if (isset($value)) {
-            $items = $value;
-            $value = new Collection;
-            foreach ($items as $i => $item) {
-                $class = $item['__CLASS__'];
-                $data = $item;
-                unset($data['__CLASS__']);
-                $value[$i] = new $class;
-                $value[$i]->fromArray($data);
-            }
+        if (!isset($value) || !count($value)) {
+            return null;
+        }
+        
+        $items = $value;
+        $value = new Collection;
+        foreach ($items as $i => $item) {
+            $class = $item['__CLASS__'];
+            $data = $item;
+            unset($data['__CLASS__']);
+            $value[$i] = new $class;
+            $value[$i]->fromArray($data);
         }
 
         return $value;
